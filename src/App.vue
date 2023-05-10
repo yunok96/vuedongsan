@@ -1,6 +1,6 @@
 <template>
 
-  <modal-page 
+  <modal-page @closeModal="모달창 = false"
   v-bind:원룸들="원룸들"
   v-bind:누른거="누른거"
   v-bind:모달창="모달창"
@@ -10,21 +10,21 @@
     <a v-for="a in menus" :key="a">{{ a }}</a>
   </div>
 
+  <dis-ban/>
 
-  <dis-ban></dis-ban>
+  <card-thing @openModal="모달창 = true; 누른거 = $event" v-for="(a,i) in 원룸들" :key="i"
+  v-bind:원룸="원룸들[i]"
+  v-bind:모달창="모달창"
+  v-bind:누른거="누른거"
+  />
 
-  <div v-for="(a, i) in 원룸들" :key="i">
-    <img :src="a.image" class="room-img">
-    <h4 v-on:click="모달창=true; 누른거=i">{{ a.title }}</h4>
-    <p>{{ a.content }}</p>
-    <p>{{ a.price }}</p>
-  </div>
 </template>
 
 <script>
 import data from './assets/data.js';
 import DiscountBanner from './components/DiscountBanner.vue';
 import Modal from './components/Modal.vue';
+import CardThing from './components/Card.vue'
 
 export default {
   name: 'App',
@@ -45,7 +45,8 @@ export default {
   },
   components: {
     DisBan : DiscountBanner,
-    ModalPage : Modal
+    ModalPage : Modal,
+    CardThing : CardThing,
   }
 }
 
@@ -76,8 +77,5 @@ div {
   color: white;
   padding: 10px;
 }
-.room-img{
-  width: 100%;
-  margin-top: 40px;
-}
+
 </style>

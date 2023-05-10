@@ -3,7 +3,7 @@
     <div class="white-bg">
       <h4>{{ 원룸들[누른거].title }}</h4>
       <p>{{ 원룸들[누른거].content }}</p>
-      <!-- <button v-on:click="모달창=false">모달창닫아</button> -->
+      <button v-on:click="closeModal">모달창닫아</button>
     </div>
   </div>
 </template>
@@ -15,7 +15,12 @@ export default {
         원룸들:Array,
         누른거:Number,
         모달창:Boolean,
-    }
+    },
+    methods: {
+        closeModal() {
+            this.$emit('closeModal')
+        }
+    },    
 }
 </script>
 
